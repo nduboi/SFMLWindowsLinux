@@ -38,9 +38,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ccache
-          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt') }}
+          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('.git/modules/**/HEAD') }}
           restore-keys: |
             ${{ runner.os }}-ccache-
+
+      - name: Zero ccache stats (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: ccache -z
 
       - name: Setup MSVC Developer Command Prompt
         if: matrix.os == 'windows-latest'
@@ -55,3 +59,7 @@ jobs:
       - name: Build C++ project
         run: |
           cmake --build build --config Release
+
+      - name: Show ccache stats (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: ccache -s

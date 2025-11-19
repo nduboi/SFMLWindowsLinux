@@ -30,13 +30,25 @@ jobs:
           libflac-dev \
           libogg-dev \
           libvorbis-dev \
-          libopenal-dev
+          libopenal-dev \
+          ccache
+
+      - name: Cache compiled objects (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ccache
+          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-ccache-
 
       - name: Setup MSVC Developer Command Prompt
         if: matrix.os == 'windows-latest'
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Configure C++ with CMake
+        env:
+          CMAKE_CXX_COMPILER_LAUNCHER: ${{ matrix.os == 'ubuntu-latest' && 'ccache' || '' }}
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 

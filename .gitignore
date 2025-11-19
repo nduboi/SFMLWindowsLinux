@@ -1,0 +1,5 @@
+.vscode
+my-build-debug
+cmake-build-debug
+.idea
+SfmlOSXExample

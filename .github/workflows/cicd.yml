@@ -25,7 +25,12 @@ jobs:
           libxcursor-dev \
           libxi-dev \
           libudev-dev \
-          libgl1-mesa-dev
+          libgl1-mesa-dev \
+          libfreetype6-dev \
+          libflac-dev \
+          libogg-dev \
+          libvorbis-dev \
+          libopenal-dev
 
       - name: Setup MSVC Developer Command Prompt
         if: matrix.os == 'windows-latest'

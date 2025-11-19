@@ -74,4 +74,4 @@ jobs:
           name: r-type-client-${{ matrix.os }}
           path: |
             build/src/client/Release
-            build/src/client/r-type-client
+            build/src/client/r-type_client

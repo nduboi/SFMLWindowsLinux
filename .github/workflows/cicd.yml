@@ -27,6 +27,7 @@ jobs:
           libudev-dev \
           libgl1-mesa-dev \
           libfreetype6-dev \
+          libharfbuzz-dev \
           libflac-dev \
           libogg-dev \
           libvorbis-dev \
